@@ -1,1 +1,1 @@
-# feigenbaum
+# Feigenbaumdiagramm
