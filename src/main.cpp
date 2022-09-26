@@ -217,10 +217,18 @@ int main()
 
 		sliders[Sliders::MAX_A_SLIDER].SetMin(sliders[Sliders::MIN_A_SLIDER].GetValue());
 
-		if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_R))
+		if (IsKeyDown(KEY_LEFT_CONTROL))
 		{
-			setConstants();
-			clear();
+			if(IsKeyPressed(KEY_R))
+			{
+				setConstants();
+				clear();
+			}
+			else if (IsKeyPressed(KEY_S))
+			{
+				ExportImage(LoadImageFromTexture(canvas.texture), "feigenbaum_diagramm.png");
+			}
+			
 		}
 
 		BeginDrawing();
@@ -238,7 +246,7 @@ int main()
 		}
 
 		DrawText("Press STRG + R\nto re-plot the graph!", partingLineX + 20, 400, FONT_SIZE_2, WHITE);
-		DrawText("Press STRG + S\nto save!", partingLineX + 20, 500, FONT_SIZE_2, WHITE);
+		DrawText("Press STRG + S\nto save the image!", partingLineX + 20, 500, FONT_SIZE_2, WHITE);
 
 		std::string fps = (std::to_string(GetFPS()) + " FPS");
 		Vector2 measureFPS = MeasureTextEx(GetFontDefault(), fps.c_str(), FONT_SIZE, 0);
@@ -247,7 +255,6 @@ int main()
 		EndDrawing();
 	}
 
-	ExportImage(LoadImageFromTexture(canvas.texture), "feigenbaum_diagramm.png");
 	UnloadRenderTexture(canvas);
 	CloseWindow();
 	return 0;
