@@ -13,14 +13,8 @@ xₙ₊₁ = axₙ(1 - xₙ)
 #define START_VALUE 0.2
 #define IMAGE_WIDTH 900
 #define IMAGE_HEIGHT 600
-#define BG_COLOR        \
-	{                   \
-		20, 40, 50, 255 \
-	}
-#define BG_COLOR_2      \
-	{                   \
-		10, 30, 40, 255 \
-	}
+#define BG_COLOR {20, 40, 50, 255}
+#define BG_COLOR_2 {10, 30, 40, 255}
 #define FONT_SIZE 10
 #define FONT_SIZE_2 20
 
