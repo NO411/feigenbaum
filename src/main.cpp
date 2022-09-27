@@ -20,7 +20,7 @@ xₙ₊₁ = axₙ(1 - xₙ)
 
 long double MIN_A = 2.9; // sichtbares Intervall
 long double MAX_A = 4;
-long double SETTLING_TIME = 1000; // Einschwingzeit
+long double SETTLING_TIME = 500; // Einschwingzeit
 long double PLOT_VALUES = 1000;	  // Iterationen
 
 class Slider
@@ -69,15 +69,13 @@ public:
 		}
 		DrawLineEx(pos, {pos.x + length, pos.y}, 4, BG_COLOR);
 		DrawCircle(pos.x + length * sliderPercentage, pos.y, dragRadius, dragColor);
-		DrawText(name.c_str(), pos.x + length / 2 - MeasureText(name.c_str(), FONT_SIZE_2) / 2, pos.y - MeasureTextEx(GetFontDefault(), name.c_str(), FONT_SIZE_2, 0).y - (dragRadius + textDist), FONT_SIZE_2, BG_COLOR);
+		DrawText(name.c_str(), pos.x + length / 2 - MeasureText(name.c_str(), FONT_SIZE_2) / 2, pos.y - MeasureTextEx(GetFontDefault(), name.c_str(), FONT_SIZE_2, 0).y - (dragRadius + textDist), FONT_SIZE_2, GRAY);
 
 		std::string minString = DoubleToString(min);
 		Vector2 minMeasure = MeasureTextEx(GetFontDefault(), minString.c_str(), FONT_SIZE, 0);
 		DrawText(minString.c_str(), pos.x - (dragRadius + textDist) - minMeasure.x, pos.y - minMeasure.y / 2, FONT_SIZE, WHITE);
 
-		std::string maxString = DoubleToString(max);
-		Vector2 maxMeasure = MeasureTextEx(GetFontDefault(), maxString.c_str(), FONT_SIZE, 0);
-		DrawText(maxString.c_str(), pos.x + length + dragRadius + textDist, pos.y - minMeasure.y / 2, FONT_SIZE, WHITE);
+		DrawText(DoubleToString(max).c_str(), pos.x + length + dragRadius + textDist, pos.y - minMeasure.y / 2, FONT_SIZE, WHITE);
 
 		std::string valueString = DoubleToString(value);
 		DrawText(valueString.c_str(), pos.x + sliderPercentage * length - MeasureText(valueString.c_str(), FONT_SIZE) / 2, pos.y + (dragRadius + textDist), FONT_SIZE, WHITE);
@@ -165,7 +163,7 @@ int main()
 	std::vector<Slider> sliders = {
 		{{partingLineX + drawOffset.x, 50}, "min a", 0, 4, &MIN_A, MIN_A},
 		{{partingLineX + drawOffset.x, 130}, "max a", 2, 4, &MAX_A, MAX_A},
-		{{partingLineX + drawOffset.x, 210}, "settling time", 0, 2000, &SETTLING_TIME, SETTLING_TIME},
+		{{partingLineX + drawOffset.x, 210}, "settling time", 0, 500, &SETTLING_TIME, SETTLING_TIME},
 		{{partingLineX + drawOffset.x, 290}, "plot values", 0, 3000, &PLOT_VALUES, PLOT_VALUES},
 	};
 
@@ -228,13 +226,16 @@ int main()
 			{
 				ExportImage(LoadImageFromTexture(canvas.texture), "feigenbaum_diagramm.png");
 			}
-			
 		}
 
 		BeginDrawing();
 		ClearBackground(BG_COLOR);
 
 		DrawTextureRec(canvas.texture, {0, 0, (float)canvas.texture.width, (float)canvas.texture.height}, drawOffset, WHITE);
+		if (p <= canvas.texture.width)
+		{
+			DrawLine(drawOffset.x + p, drawOffset.y, drawOffset.x + p, drawOffset.y + canvas.texture.height, {255, 255, 255, 50});
+		}
 		RenderCoordinateSystem(canvas.texture, drawOffset, lineLength, dist);
 
 		DrawLine(partingLineX, 0, partingLineX, GetScreenHeight(), WHITE);
