@@ -1,6 +1,6 @@
 # Feigenbaumdiagramm
 
-![screenshot](https://raw.githubusercontent.com/NO411/feigenbaum/main/feigenbaum_diagramm.png?token=GHSAT0AAAAAABYUSQ7Z6M6LBTUIPGCODSSEYZVXQEA)
+![screenshot](https://raw.githubusercontent.com/NO411/feigenbaum/main/feigenbaum_diagramm.png?token=GHSAT0AAAAAABYUSQ7ZQ7UZF7MJHCGPDWJCYZVX3PQ)
 
 ## Installation
 Install Raylib.
