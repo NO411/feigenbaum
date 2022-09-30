@@ -139,13 +139,6 @@ const int Slider::length = 150;
 const int Slider::textDist = 5;
 const int Slider::dragRadius = 8;
 
-class Button
-{
-private:
-public:
-	Button();
-};
-
 void Init();
 
 long double GetNewValue(long double a, long double xn);
